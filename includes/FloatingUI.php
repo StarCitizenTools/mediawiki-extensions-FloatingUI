@@ -37,7 +37,7 @@ class FloatingUI {
 			<$wrapperTag class='ext-floatingui-reference'>$referenceHtml</$wrapperTag>
 			<$wrapperTag class='ext-floatingui-content'>$contentHtml</$wrapperTag>
 		HTML;
-	
+
 		return [ $output, 'noparse' => true, 'isHTML' => true ];
 		*/
 	}
