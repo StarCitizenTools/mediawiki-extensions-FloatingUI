@@ -1,0 +1,53 @@
+{
+	"name": "FloatingUI",
+	"version": "0.0.1",
+	"author": [
+		"alistair3149"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:FloatingUI",
+	"descriptionmsg": "floatingui-desc",
+	"type": "parserhook",
+	"license-name": "GPL-3.0-or-later",
+	"requires": {
+		"MediaWiki": ">= 1.39.0"
+	},
+	"MessagesDirs": {
+		"FloatingUI": [
+			"/i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"FloatingUIMagic": "FloatingUI.magic.php"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\FloatingUI\\": "includes/"
+	},
+	"ResourceModules": {
+		"ext.floatingUI.lib": {
+			"scripts": [
+				"ext.floatingUI.lib/core.js",
+				"ext.floatingUI.lib/dom.js"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "FloatingUI/modules"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "parser"
+	},
+	"HookHandlers": {
+		"parser": {
+			"class": "MediaWiki\\Extension\\FloatingUI\\Hooks"
+		}
+	},
+	"attributes": {
+		"CodeMirror": {
+			"TagModes": {
+				"floatingui": "text/mediawiki"
+			}
+		}
+	},
+	"manifest_version": 2
+}
