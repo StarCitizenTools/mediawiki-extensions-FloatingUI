@@ -24,7 +24,7 @@ mw.loader.load( 'ext.floatingUI.lib' );
 
 ### Defining elements
 1. Reference element has to have the HTML class `ext-floatingui-reference`.
-2. Floating element has to have the HTML class `ext-floatingui-content` and place next to the reference element.
+2. Floating element has to have the HTML class `ext-floatingui-content` and is a direct children of the reference element.
 
 ## Requirements
 * [MediaWiki](https://www.mediawiki.org) 1.39 or later
