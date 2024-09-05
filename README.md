@@ -7,7 +7,12 @@ The FloatingUI extension implements [Floating UI](https://floating-ui.com) libra
 ## Usage
 This extension is in an early stage of development.
 
-### Loading library
+### Parser function
+```wikitext
+{{#floatingui:reference|content}}
+```
+
+### Loading library only
 There are several ways to load the library on a given page. Once the library is loaded, it can be accessed through `window.FloatingUIDOM` in Javascript.
 
 
