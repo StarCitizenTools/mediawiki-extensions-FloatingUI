@@ -18,7 +18,7 @@ class FloatingUI {
 	 * @return string The expanded argument value if found, otherwise an empty string.
 	 */
 	private static function getArg( $key, array $args, PPFrame $frame ): string {
-		return $frame->expand( $args[$key] ?? '');
+		return $frame->expand( $args[$key] ?? '' );
 	}
 
 	/**
