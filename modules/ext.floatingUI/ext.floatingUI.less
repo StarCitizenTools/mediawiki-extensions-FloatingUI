@@ -5,6 +5,7 @@
 .ext-floatingui-floating {
 	position: absolute;
 	z-index: 800; /* z-index-tooltip */
+	border-radius: 2px;
 	background-color: var( --background-color-base, #fff );
 	box-shadow:
 		0 20px 48px 0 rgba( 0, 0, 0, 0.2 ), /* box-shadow-drop-xx-large */
@@ -14,6 +15,7 @@
 }
 
 .ext-floatingui-floating-content {
+	border-radius: inherit;
 	background-color: inherit;
 	padding: 4px 8px; /* spacing-25 spacing-50 */
 }

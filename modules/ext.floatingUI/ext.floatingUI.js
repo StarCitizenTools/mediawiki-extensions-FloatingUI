@@ -14,8 +14,14 @@ class FloatingUI {
 		this.f.computePosition( this.referenceEl, this.floatingEl, {
 			middleware: [
 				this.f.offset( 4 ),
+				this.f.shift( {
+					padding: 4
+				} ),
 				this.f.autoPlacement(),
-				this.f.arrow( { element: this.arrowEl } )
+				this.f.arrow( {
+					element: this.arrowEl,
+					padding: 4
+				} )
 			]
 		} ).then( ( { x, y, placement, middlewareData } ) => {
 			Object.assign( this.floatingEl.style, {
