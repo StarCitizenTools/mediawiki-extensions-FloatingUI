@@ -103,12 +103,13 @@ function init() {
 	const sharedEls = createSharedEls();
 
 	referenceEls.forEach( ( referenceEl ) => {
-		const contentEl = referenceEl.querySelector( ':scope > .ext-floatingui-content' );
-		// Exit if the floating element is not inside the reference element
+		// Exit if the floating element is not next to the reference
 		// TODO: Implement a way to define a floating element so that it can be placed somewhere else
-		if ( !contentEl ) {
+		if ( !referenceEl.nextElementSibling || referenceEl.nextElementSibling.classList.contains( '.ext-floatingui-content' ) ) {
 			return;
 		}
+
+		const contentEl = referenceEl.nextElementSibling;
 
 		const instance = new FloatingUI( Object.assign( sharedEls, {
 			reference: referenceEl,
