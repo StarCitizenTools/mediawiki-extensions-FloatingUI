@@ -23,6 +23,26 @@
 		"MediaWiki\\Extension\\FloatingUI\\": "includes/"
 	},
 	"ResourceModules": {
+		"ext.floatingUI.init.styles": {
+			"styles": [
+				"ext.floatingUI.init/ext.floatingUI.init.less"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.floatingUI": {
+			"packageFiles": [
+				"ext.floatingUI/ext.floatingUI.js"
+			],
+			"styles": [
+				"ext.floatingUI/ext.floatingUI.less"
+			],
+			"dependencies": [
+				"ext.floatingUI.lib"
+			]
+		},
 		"ext.floatingUI.lib": {
 			"scripts": [
 				"ext.floatingUI.lib/core.js",
