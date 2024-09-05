@@ -10,9 +10,9 @@ class FloatingUI {
 		this.hide = this.hide.bind( this );
 	}
 
-	roundByDPR(value) {
+	roundByDPR( value ) {
 		const dpr = window.devicePixelRatio || 1;
-		return Math.round(value * dpr) / dpr;
+		return Math.round( value * dpr ) / dpr;
 	}
 
 	update() {
@@ -30,7 +30,7 @@ class FloatingUI {
 			]
 		} ).then( ( { x, y, placement, middlewareData } ) => {
 			Object.assign( this.floatingEl.style, {
-				transform: `translate(${this.roundByDPR(x)}px,${this.roundByDPR(y)}px)`
+				transform: `translate(${ this.roundByDPR( x ) }px,${ this.roundByDPR( y ) }px)`
 			} );
 
 			if ( middlewareData.arrow ) {
@@ -75,6 +75,15 @@ class FloatingUI {
 			this.referenceEl.addEventListener( event, listener );
 		} );
 	}
+
+	setupAttributes() {
+		this.referenceEl.setAttribute( 'tabindex', '0' );
+	}
+
+	init() {
+		this.setupAttributes();
+		this.attach();
+	}
 }
 
 // Create a multiple shared elements to be reused
@@ -115,7 +124,7 @@ function init() {
 			reference: referenceEl,
 			content: contentEl
 		} ) );
-		instance.attach();
+		instance.init();
 	} );
 }
 
