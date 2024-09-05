@@ -3,7 +3,27 @@
 }
 
 .ext-floatingui-floating {
+	position: absolute;
 	z-index: 800; /* z-index-tooltip */
-	padding: 4px 8px;
-	background-color: #fff;
+	background-color: var( --background-color-base, #fff );
+	box-shadow:
+		0 20px 48px 0 rgba( 0, 0, 0, 0.2 ), /* box-shadow-drop-xx-large */
+		0 0 0 1px var( --background-color-neutral,#eaecf0 ); /* box-shadow-outset-small */
+	color: var( --color-base, #202122 );
+	font-size: 0.875rem; /* font-size-small */
+}
+
+.ext-floatingui-floating-content {
+	background-color: inherit;
+	padding: 4px 8px; /* spacing-25 spacing-50 */
+}
+
+.ext-floatingui-floating-arrow {
+	position: absolute;
+	z-index: -1;
+	width: 8px;
+	height: 8px;
+	background-color: inherit;
+	box-shadow: inherit;
+	transform: rotate( 45deg );
 }
