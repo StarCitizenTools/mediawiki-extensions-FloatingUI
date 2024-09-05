@@ -7,9 +7,8 @@
 	z-index: 800; /* z-index-tooltip */
 	border-radius: 2px;
 	background-color: var( --background-color-base, #fff );
-	box-shadow:
-		0 20px 48px 0 rgba( 0, 0, 0, 0.2 ), /* box-shadow-drop-xx-large */
-		0 0 0 1px var( --background-color-neutral,#eaecf0 ); /* box-shadow-outset-small */
+	border: 1px solid var( --border-color-muted, #eaecf0 ); /* border-color-muted */
+	box-shadow: 0 20px 48px 0 rgba( 0, 0, 0, 0.2 ); /* box-shadow-drop-xx-large */
 	color: var( --color-base, #202122 );
 	font-size: 0.875rem; /* font-size-small */
 }
@@ -17,7 +16,7 @@
 .ext-floatingui-floating-content {
 	border-radius: inherit;
 	background-color: inherit;
-	padding: 4px 8px; /* spacing-25 spacing-50 */
+	padding: 8px 12px; /* spacing-50 spacing-75 */
 }
 
 .ext-floatingui-floating-arrow {
@@ -28,4 +27,5 @@
 	background-color: inherit;
 	box-shadow: inherit;
 	transform: rotate( 45deg );
+	border: inherit;
 }
