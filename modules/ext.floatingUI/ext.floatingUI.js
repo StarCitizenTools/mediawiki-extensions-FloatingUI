@@ -1,5 +1,6 @@
 // TODO: Maybe we should give each floating element an unique ID
 const FLOATING_EL_ID = 'ext-floatingui-floating';
+const FLOATING_EL_VISIBLE_CLASS = 'ext-floatingui-floating--visible';
 
 class FloatingUI {
 	constructor( elements ) {
@@ -31,9 +32,9 @@ class FloatingUI {
 				} )
 			]
 		} ).then( ( { x, y, placement, middlewareData } ) => {
-			Object.assign( this.floatingEl.style, {
-				transform: `translate(${ this.roundByDPR( x ) }px,${ this.roundByDPR( y ) }px)`
-			} );
+			this.floatingEl.style.setProperty( '--ext-floatingui-floating-x', `${ x }px` );
+			this.floatingEl.style.setProperty( '--ext-floatingui-floating-y', `${ y }px` );
+			this.floatingEl.dataset.mwExtFloatinguiPlacement = placement;
 
 			if ( middlewareData.arrow ) {
 				const { x: arrowX, y: arrowY } = middlewareData.arrow;
@@ -67,6 +68,8 @@ class FloatingUI {
 		this.referenceEl.setAttribute( 'aria-controls', FLOATING_EL_ID );
 		this.update();
 		this.attach( this.floatingEl );
+		// eslint-disable-next-line mediawiki/class-doc
+		this.floatingEl.classList.add( FLOATING_EL_VISIBLE_CLASS );
 	}
 
 	hide( event ) {
@@ -76,6 +79,8 @@ class FloatingUI {
 		this.floatingContentEl.innerHTML = '';
 		this.referenceEl.setAttribute( 'aria-expanded', 'false' );
 		this.referenceEl.removeAttribute( 'aria-controls' );
+		// eslint-disable-next-line mediawiki/class-doc
+		this.floatingEl.classList.remove( FLOATING_EL_VISIBLE_CLASS );
 		this.floatingEl.remove();
 	}
 

@@ -3,16 +3,43 @@
 }
 
 .ext-floatingui-floating {
+	--ext-floatingui-floating-motion-distance: 4px;
 	position: absolute;
 	z-index: 800; /* z-index-tooltip */
-	top: 0;
-	left: 0;
+	top: var( --ext-floatingui-floating-y, 0 );
+	left: var( --ext-floatingui-floating-x, 0 );
 	border: 1px solid var( --border-color-muted, #eaecf0 ); /* border-color-muted */
 	border-radius: 2px;
 	background-color: var( --background-color-base, #fff );
 	box-shadow: 0 20px 48px 0 rgba( 0, 0, 0, 0.2 ); /* box-shadow-drop-xx-large */
 	color: var( --color-base, #202122 );
 	font-size: 0.875rem; /* font-size-small */
+	opacity: 0;
+	transform: translateX( var( --ext-floatingui-floating-motion-x, 0 ) ) translateY( var( --ext-floatingui-floating-motion-y, 0 ) );
+	transition-duration: 250ms; /* transition-duration-base */
+	transition-property: transform, opacity;
+	transition-timing-function: ease; /* transition-timing-function-system */
+}
+
+.ext-floatingui-floating--visible {
+	opacity: 1;
+	transition-delay: 250ms; /* transition-duration-medium */
+}
+
+.ext-floatingui-floating--visible[ data-mw-ext-floatingui-placement='top' ] {
+	--ext-floatingui-floating-motion-y: ~'calc( var( --ext-floatingui-floating-motion-distance ) * -1 )';
+}
+
+.ext-floatingui-floating--visible[ data-mw-ext-floatingui-placement='right' ] {
+	--ext-floatingui-floating-motion-x: var( --ext-floatingui-floating-motion-distance );
+}
+
+.ext-floatingui-floating--visible[ data-mw-ext-floatingui-placement='bottom' ] {
+	--ext-floatingui-floating-motion-y: var( --ext-floatingui-floating-motion-distance );
+}
+
+.ext-floatingui-floating--visible[ data-mw-ext-floatingui-placement='left' ] {
+	--ext-floatingui-floating-motion-x: ~'calc( var( --ext-floatingui-floating-motion-distance ) * -1 )';
 }
 
 .ext-floatingui-floating-content {
