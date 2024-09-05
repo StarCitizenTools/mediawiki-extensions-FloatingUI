@@ -10,6 +10,11 @@ class FloatingUI {
 		this.hide = this.hide.bind( this );
 	}
 
+	roundByDPR(value) {
+		const dpr = window.devicePixelRatio || 1;
+		return Math.round(value * dpr) / dpr;
+	}
+
 	update() {
 		this.f.computePosition( this.referenceEl, this.floatingEl, {
 			middleware: [
@@ -25,17 +30,11 @@ class FloatingUI {
 			]
 		} ).then( ( { x, y, placement, middlewareData } ) => {
 			Object.assign( this.floatingEl.style, {
-				left: `${ x }px`,
-				top: `${ y }px`
+				transform: `translate(${this.roundByDPR(x)}px,${this.roundByDPR(y)}px)`
 			} );
 
 			if ( middlewareData.arrow ) {
 				const { x: arrowX, y: arrowY } = middlewareData.arrow;
-
-				Object.assign( this.arrowEl.style, {
-					left: x !== null ? `${ x }px` : '',
-					top: y !== null ? `${ y }px` : ''
-				} );
 
 				const staticSide = {
 					top: 'bottom',
