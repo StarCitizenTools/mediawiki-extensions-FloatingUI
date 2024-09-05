@@ -1,3 +1,6 @@
+// TODO: Maybe we should give each floating element an unique ID
+const FLOATING_EL_ID = 'ext-floatingui-floating';
+
 class FloatingUI {
 	constructor( elements ) {
 		this.referenceEl = elements.reference;
@@ -18,7 +21,6 @@ class FloatingUI {
 	update() {
 		this.f.computePosition( this.referenceEl, this.floatingEl, {
 			middleware: [
-				this.f.offset( 4 ),
 				this.f.shift( {
 					padding: 4
 				} ),
@@ -54,43 +56,60 @@ class FloatingUI {
 		} );
 	}
 
+	isRelatedTarget( el ) {
+		return this.referenceEl.contains( el ) || this.floatingEl.contains( el );
+	}
+
 	show() {
 		this.floatingContentEl.innerHTML = this.contentEl.innerHTML;
 		document.body.append( this.floatingEl );
+		this.referenceEl.setAttribute( 'aria-expanded', 'true' );
+		this.referenceEl.setAttribute( 'aria-controls', FLOATING_EL_ID );
 		this.update();
+		this.attach( this.floatingEl );
 	}
 
-	hide() {
+	hide( event ) {
+		if ( this.isRelatedTarget( event.relatedTarget || event.target ) ) {
+			return;
+		}
 		this.floatingContentEl.innerHTML = '';
+		this.referenceEl.setAttribute( 'aria-expanded', 'false' );
+		this.referenceEl.removeAttribute( 'aria-controls' );
 		this.floatingEl.remove();
 	}
 
-	attach() {
+	attach( el ) {
 		[
 			[ 'mouseenter', this.show ],
 			[ 'mouseleave', this.hide ],
 			[ 'focus', this.show ],
 			[ 'blur', this.hide ]
 		].forEach( ( [ event, listener ] ) => {
-			this.referenceEl.addEventListener( event, listener );
+			el.addEventListener( event, listener );
 		} );
 	}
 
 	setupAttributes() {
+		// Allow the reference element to be focusable
 		this.referenceEl.setAttribute( 'tabindex', '0' );
+		this.referenceEl.setAttribute( 'aria-expanded', 'false' );
+		// Hide the content element from accessiblity tree
+		this.contentEl.setAttribute( 'aria-hidden', 'true' );
 	}
 
 	init() {
 		this.setupAttributes();
-		this.attach();
+		this.attach( this.referenceEl );
 	}
 }
 
 // Create a multiple shared elements to be reused
 function createSharedEls() {
 	const floatingEl = document.createElement( 'div' );
+	floatingEl.id = FLOATING_EL_ID;
 	floatingEl.classList.add( 'ext-floatingui-floating' );
-	floatingEl.setAttribute( 'aria-hidden', 'true' );
+	floatingEl.setAttribute( 'tabindex', '0' );
 
 	const floatingContentEl = document.createElement( 'div' );
 	floatingContentEl.classList.add( 'ext-floatingui-floating-content' );
