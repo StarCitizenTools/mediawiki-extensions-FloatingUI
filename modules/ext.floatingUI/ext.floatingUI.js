@@ -82,6 +82,7 @@ class FloatingUI {
 function createSharedEls() {
 	const floatingEl = document.createElement( 'div' );
 	floatingEl.classList.add( 'ext-floatingui-floating' );
+	floatingEl.setAttribute( 'aria-hidden', 'true' );
 
 	const floatingContentEl = document.createElement( 'div' );
 	floatingContentEl.classList.add( 'ext-floatingui-floating-content' );
