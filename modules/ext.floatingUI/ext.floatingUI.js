@@ -22,19 +22,22 @@ class FloatingUI {
 
 	update() {
 		this.f.computePosition( this.referenceEl, this.floatingEl, {
+			placement: 'top',
 			middleware: [
+				this.f.autoPlacement( {
+					allowedPlacements: [ 'top', 'bottom' ]
+				} ),
 				this.f.shift( {
 					padding: 16
 				} ),
-				this.f.autoPlacement(),
 				this.f.arrow( {
 					element: this.arrowEl,
 					padding: 4
 				} )
 			]
 		} ).then( ( { x, y, placement, middlewareData } ) => {
-			this.floatingEl.style.setProperty( '--ext-floatingui-floating-x', `${ x }px` );
-			this.floatingEl.style.setProperty( '--ext-floatingui-floating-y', `${ y }px` );
+			this.floatingEl.style.setProperty( '--ext-floatingui-floating-x', `${ this.roundByDPR( x ) }px` );
+			this.floatingEl.style.setProperty( '--ext-floatingui-floating-y', `${ this.roundByDPR( y ) }px` );
 			this.floatingEl.dataset.mwExtFloatinguiPlacement = placement;
 
 			if ( middlewareData.arrow ) {
@@ -48,8 +51,10 @@ class FloatingUI {
 				}[ placement.split( '-' )[ 0 ] ];
 
 				Object.assign( this.arrowEl.style, {
-					left: arrowX !== null ? `${ arrowX }px` : '',
-					top: arrowY !== null ? `${ arrowY }px` : '',
+					// eslint-disable-next-line eqeqeq
+					left: arrowX != null ? `${ this.roundByDPR( arrowX ) }px` : '',
+					// eslint-disable-next-line eqeqeq
+					top: arrowY != null ? `${ this.roundByDPR( arrowY ) }px` : '',
 					right: '',
 					bottom: '',
 					[ staticSide ]: '-4px'
