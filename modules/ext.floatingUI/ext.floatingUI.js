@@ -36,8 +36,9 @@ class FloatingUI {
 				} )
 			]
 		} ).then( ( { x, y, placement, middlewareData } ) => {
-			this.floatingEl.style.setProperty( '--ext-floatingui-floating-x', `${ this.roundByDPR( x ) }px` );
-			this.floatingEl.style.setProperty( '--ext-floatingui-floating-y', `${ this.roundByDPR( y ) }px` );
+			Object.assign( this.floatingEl.style, {
+				transform: `translate(${ this.roundByDPR( x ) }px,${ this.roundByDPR( y ) }px)`
+			} );
 			this.floatingEl.dataset.mwExtFloatinguiPlacement = placement;
 
 			if ( middlewareData.arrow ) {
@@ -132,13 +133,17 @@ function createSharedEls() {
 	floatingEl.classList.add( 'ext-floatingui-floating' );
 	floatingEl.setAttribute( 'tabindex', '0' );
 
+	const innerEl = document.createElement( 'div' );
+	innerEl.classList.add( 'ext-floatingui-floating-inner' );
+
 	const floatingContentEl = document.createElement( 'div' );
 	floatingContentEl.classList.add( 'ext-floatingui-floating-content' );
 
 	const arrowEl = document.createElement( 'div' );
 	arrowEl.classList.add( 'ext-floatingui-floating-arrow' );
 
-	floatingEl.append( floatingContentEl, arrowEl );
+	innerEl.append( floatingContentEl, arrowEl );
+	floatingEl.append( innerEl );
 
 	return {
 		arrow: arrowEl,
