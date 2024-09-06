@@ -67,32 +67,30 @@ class FloatingUI {
 		this.referenceEl.setAttribute( 'aria-expanded', 'true' );
 		this.referenceEl.setAttribute( 'aria-controls', FLOATING_EL_ID );
 		this.update();
-		this.attach( this.floatingEl );
 		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.add( FLOATING_EL_VISIBLE_CLASS );
+		[
+			[ 'mouseleave', this.hide ],
+			[ 'blur', this.hide ]
+		].forEach( ( [ event, listener ] ) => {
+			this.floatingEl.addEventListener( event, listener );
+		} );
 	}
 
 	hide( event ) {
 		if ( this.isRelatedTarget( event.relatedTarget || event.target ) ) {
 			return;
 		}
-		this.floatingContentEl.innerHTML = '';
 		this.referenceEl.setAttribute( 'aria-expanded', 'false' );
 		this.referenceEl.removeAttribute( 'aria-controls' );
 		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.remove( FLOATING_EL_VISIBLE_CLASS );
-		this.floatingEl.remove();
-	}
-
-	attach( el ) {
-		[
-			[ 'mouseenter', this.show ],
-			[ 'mouseleave', this.hide ],
-			[ 'focus', this.show ],
-			[ 'blur', this.hide ]
-		].forEach( ( [ event, listener ] ) => {
-			el.addEventListener( event, listener );
-		} );
+		// Delay the removal of the element by 250ms + 250ms (transition delay + transition duration)
+		setTimeout( () => {
+			if ( !this.floatingEl.classList.contains( FLOATING_EL_VISIBLE_CLASS ) ) {
+				this.floatingEl.remove();
+			}
+		}, 500 );
 	}
 
 	setupAttributes() {
@@ -105,7 +103,14 @@ class FloatingUI {
 
 	init() {
 		this.setupAttributes();
-		this.attach( this.referenceEl );
+		[
+			[ 'mouseenter', this.show ],
+			[ 'mouseleave', this.hide ],
+			[ 'focus', this.show ],
+			[ 'blur', this.hide ]
+		].forEach( ( [ event, listener ] ) => {
+			this.referenceEl.addEventListener( event, listener );
+		} );
 	}
 }
 
