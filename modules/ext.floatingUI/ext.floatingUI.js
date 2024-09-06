@@ -10,6 +10,7 @@ class FloatingUI {
 		this.floatingContentEl = elements.floatingContent;
 		this.arrowEl = elements.arrow;
 		this.f = window.FloatingUIDOM;
+		this.update = this.update.bind( this );
 		this.show = this.show.bind( this );
 		this.hide = this.hide.bind( this );
 	}
@@ -23,7 +24,7 @@ class FloatingUI {
 		this.f.computePosition( this.referenceEl, this.floatingEl, {
 			middleware: [
 				this.f.shift( {
-					padding: 4
+					padding: 16
 				} ),
 				this.f.autoPlacement(),
 				this.f.arrow( {
@@ -64,9 +65,13 @@ class FloatingUI {
 	show() {
 		this.floatingContentEl.innerHTML = this.contentEl.innerHTML;
 		document.body.append( this.floatingEl );
+		this.cleanup = this.f.autoUpdate(
+			this.referenceEl,
+			this.floatingEl,
+			this.update
+		);
 		this.referenceEl.setAttribute( 'aria-expanded', 'true' );
 		this.referenceEl.setAttribute( 'aria-controls', FLOATING_EL_ID );
-		this.update();
 		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.add( FLOATING_EL_VISIBLE_CLASS );
 		[
@@ -89,6 +94,7 @@ class FloatingUI {
 		setTimeout( () => {
 			if ( !this.floatingEl.classList.contains( FLOATING_EL_VISIBLE_CLASS ) ) {
 				this.floatingEl.remove();
+				this.cleanup();
 			}
 		}, 500 );
 	}
