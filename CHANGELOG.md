@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.1.0...v0.2.0) (2024-09-07)
+
+
+### Features
+
+* add animation to floating elements ([44c6751](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/44c67512c3c5de70cac622684d661faf15924761))
+* constrain to top and bottom alignment only ([0fb2c11](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/0fb2c11884fe736cb7f0f5fc1419c0fb0a87e43f))
+* separate floating positioning from content ([47de78b](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/47de78bdcb3654a78f32ddeb469a4b7f073c4a4a))
+* use autoUpdate by default ([75e3930](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/75e39308647e514a96376fe75e6f9121dc252911))
+
+
+### Bug Fixes
+
+* prevent floating element from breaking viewport ([43f8870](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/43f8870e3c2282b93f80224216d6afb577519f88))
+* remove elements after transition ([3f34b71](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/3f34b7190f2ab6bf5429b8b5d1e529cd57d2980f))
+
 ## [0.1.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.0.1...v0.1.0) (2024-09-05)
 
 
