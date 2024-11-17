@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.2.0...v0.2.1) (2024-11-17)
+
+
+### Miscellaneous Chores
+
+* set installer-name for composer ([2aa7a2b](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/2aa7a2be0e9dbf8ca75aea31d8c4b45f3a847131))
+
 ## [0.2.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.1.0...v0.2.0) (2024-09-07)
 
 
