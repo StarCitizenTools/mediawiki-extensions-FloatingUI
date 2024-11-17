@@ -45,6 +45,9 @@
 		],
 		"phan": "phan -d . --long-progress-bar"
 	},
+	"extra": {
+		"installer-name": "FloatingUI"
+	},
 	"config": {
 		"allow-plugins": {
 			"composer/installers": true,
