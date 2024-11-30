@@ -131,13 +131,13 @@ function createSharedEls() {
 	floatingEl.setAttribute( 'tabindex', '0' );
 
 	const innerEl = document.createElement( 'div' );
-	innerEl.classList.add( 'ext-floatingui-floating-inner' );
-
-	const floatingContentEl = document.createElement( 'div' );
-	floatingContentEl.classList.add(
-		'ext-floatingui-floating-content',
+	innerEl.classList.add(
+		'ext-floatingui-floating-inner',
 		'mw-parser-output' // needed for TemplateStyles to function correctly
 	);
+
+	const floatingContentEl = document.createElement( 'div' );
+	floatingContentEl.classList.add( 'ext-floatingui-floating-content' );
 
 	const arrowEl = document.createElement( 'div' );
 	arrowEl.classList.add( 'ext-floatingui-floating-arrow' );
