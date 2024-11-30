@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.3.0...v0.3.1) (2024-11-30)
+
+
+### Bug Fixes
+
+* match all sibling elements instead of the next one ([5f36d05](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/5f36d0556b53d1547d836eb9e5431c28d5ceb61d))
+* mw-parser-output should apply to inner element ([3041a91](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/3041a91ad8d842535d7bc0a7af4e2eab7c069eb5))
+
 ## [0.3.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.2.0...v0.3.0) (2024-11-30)
 
 
