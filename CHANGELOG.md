@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.2.0...v0.3.0) (2024-11-30)
+
+
+### Features
+
+* add mw-parser-output to floating-content so tooltip content can be styled by TemplateStyles ([512cb20](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/512cb20e3d17ae2f038324fe242b3e8aa41ccd12))
+* use aria-details for reference element ([4ba15fe](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/4ba15fe35bb99a23833917e11bb3f67d2653d4b5))
+
+
+### Miscellaneous Chores
+
+* set installer-name for composer ([2aa7a2b](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/2aa7a2be0e9dbf8ca75aea31d8c4b45f3a847131))
+
 ## [0.2.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.1.0...v0.2.0) (2024-09-07)
 
 
