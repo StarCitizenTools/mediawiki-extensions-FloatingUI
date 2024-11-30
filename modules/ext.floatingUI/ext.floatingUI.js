@@ -152,19 +152,26 @@ function createSharedEls() {
 	};
 }
 
+function findContentEl( referenceEl ) {
+	let sibling = referenceEl.nextElementSibling;
+	while ( sibling ) {
+		if ( sibling.classList.contains( 'ext-floatingui-content' ) ) {
+			return sibling;
+		}
+		sibling = sibling.nextElementSibling;
+	}
+	return;
+}
+
 function init() {
 	const referenceEls = document.querySelectorAll( '.ext-floatingui-reference' );
 	const sharedEls = createSharedEls();
 
 	referenceEls.forEach( ( referenceEl ) => {
-		// Exit if the floating element is not next to the reference
-		// TODO: Implement a way to define a floating element so that it can be placed somewhere else
-		if ( !referenceEl.nextElementSibling || referenceEl.nextElementSibling.classList.contains( '.ext-floatingui-content' ) ) {
+		const contentEl = findContentEl( referenceEl );
+		if ( !contentEl ) {
 			return;
 		}
-
-		const contentEl = referenceEl.nextElementSibling;
-
 		const instance = new FloatingUI( Object.assign( sharedEls, {
 			reference: referenceEl,
 			content: contentEl
