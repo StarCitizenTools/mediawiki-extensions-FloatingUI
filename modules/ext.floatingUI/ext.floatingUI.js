@@ -76,8 +76,7 @@ class FloatingUI {
 			this.floatingEl,
 			this.update
 		);
-		this.referenceEl.setAttribute( 'aria-expanded', 'true' );
-		this.referenceEl.setAttribute( 'aria-controls', FLOATING_EL_ID );
+		this.referenceEl.setAttribute( 'aria-details', FLOATING_EL_ID );
 		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.add( FLOATING_EL_VISIBLE_CLASS );
 		[
@@ -92,8 +91,7 @@ class FloatingUI {
 		if ( this.isRelatedTarget( event.relatedTarget || event.target ) ) {
 			return;
 		}
-		this.referenceEl.setAttribute( 'aria-expanded', 'false' );
-		this.referenceEl.removeAttribute( 'aria-controls' );
+		this.referenceEl.removeAttribute( 'aria-details' );
 		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.remove( FLOATING_EL_VISIBLE_CLASS );
 		// Delay the removal of the element by 250ms + 250ms (transition delay + transition duration)
@@ -108,7 +106,6 @@ class FloatingUI {
 	setupAttributes() {
 		// Allow the reference element to be focusable
 		this.referenceEl.setAttribute( 'tabindex', '0' );
-		this.referenceEl.setAttribute( 'aria-expanded', 'false' );
 		// Hide the content element from accessiblity tree
 		this.contentEl.setAttribute( 'aria-hidden', 'true' );
 	}
