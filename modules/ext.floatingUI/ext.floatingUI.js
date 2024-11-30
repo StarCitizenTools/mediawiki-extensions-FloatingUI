@@ -137,7 +137,10 @@ function createSharedEls() {
 	innerEl.classList.add( 'ext-floatingui-floating-inner' );
 
 	const floatingContentEl = document.createElement( 'div' );
-	floatingContentEl.classList.add( 'ext-floatingui-floating-content' );
+	floatingContentEl.classList.add(
+		'ext-floatingui-floating-content',
+		'mw-parser-output' // needed for TemplateStyles to function correctly
+	);
 
 	const arrowEl = document.createElement( 'div' );
 	arrowEl.classList.add( 'ext-floatingui-floating-arrow' );
