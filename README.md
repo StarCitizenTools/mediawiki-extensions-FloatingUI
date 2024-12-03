@@ -5,8 +5,6 @@ The FloatingUI extension implements [Floating UI](https://floating-ui.com) libra
 [Extension:FloatingUI on MediaWiki](https://www.mediawiki.org/wiki/Extension:FloatingUI).
 
 ## Usage
-This extension is in an early stage of development.
-
 ### Parser function
 ```wikitext
 {{#floatingui:reference|content}}
