@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.3.1...v0.4.0) (2025-01-04)
+
+
+### Features
+
+* increase floating content padding ([f77590f](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/f77590f6ff61b3a27f6b67ed7e3e06f979d92be9))
+
 ## [0.3.1](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.3.0...v0.3.1) (2024-11-30)
 
 
