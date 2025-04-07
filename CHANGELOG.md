@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.0...v1.0.1) (2025-04-07)
+
+
+### Bug Fixes
+
+* remove conflicting CSS with teleportTarget ([112c973](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/112c97335b3ebefc594abddc75117a5cf7de6e57))
+
 ## [1.0.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.3.1...v1.0.0) (2025-04-07)
 
 
