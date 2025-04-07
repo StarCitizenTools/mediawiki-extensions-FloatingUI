@@ -9,6 +9,7 @@ class FloatingUI {
 		this.floatingEl = elements.floating;
 		this.floatingContentEl = elements.floatingContent;
 		this.arrowEl = elements.arrow;
+		this.teleportTarget = elements.teleportTarget;
 		this.f = window.FloatingUIDOM;
 		this.update = this.update.bind( this );
 		this.show = this.show.bind( this );
@@ -70,7 +71,7 @@ class FloatingUI {
 
 	show() {
 		this.floatingContentEl.innerHTML = this.contentEl.innerHTML;
-		document.body.append( this.floatingEl );
+		this.teleportTarget.append( this.floatingEl );
 		this.cleanup = this.f.autoUpdate(
 			this.referenceEl,
 			this.floatingEl,
@@ -166,6 +167,7 @@ function findContentEl( referenceEl ) {
 function init() {
 	const referenceEls = document.querySelectorAll( '.ext-floatingui-reference' );
 	const sharedEls = createSharedEls();
+	const teleportTarget = require( 'mediawiki.page.ready' ).teleportTarget ?? document.body;
 
 	referenceEls.forEach( ( referenceEl ) => {
 		const contentEl = findContentEl( referenceEl );
@@ -174,7 +176,8 @@ function init() {
 		}
 		const instance = new FloatingUI( Object.assign( sharedEls, {
 			reference: referenceEl,
-			content: contentEl
+			content: contentEl,
+			teleportTarget: teleportTarget
 		} ) );
 		instance.init();
 	} );

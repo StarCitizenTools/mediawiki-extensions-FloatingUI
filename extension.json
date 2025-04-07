@@ -40,7 +40,8 @@
 				"ext.floatingUI/ext.floatingUI.less"
 			],
 			"dependencies": [
-				"ext.floatingUI.lib"
+				"ext.floatingUI.lib",
+				"mediawiki.page.ready"
 			]
 		},
 		"ext.floatingUI.lib": {
