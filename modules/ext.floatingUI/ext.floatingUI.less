@@ -1,33 +1,33 @@
+@import 'mediawiki.skin.variables.less';
+
 .ext-floatingui-reference[ tabindex='0' ] {
 	cursor: pointer;
 }
 
 .ext-floatingui-floating {
 	position: absolute;
-	z-index: 800; /* z-index-tooltip */
+	z-index: @z-index-tooltip;
 	top: 0;
 	left: 0;
-	max-width: calc( 100vw - 32px ); /* Stop floating element from oveflowing viewport */
+	max-width: calc( 100vw - @spacing-200 );
 }
 
 .ext-floatingui-floating-inner {
 	--ext-floatingui-floating-motion-distance: 4px;
-	border: 1px solid var( --border-color-muted, #eaecf0 ); /* border-color-muted */
-	border-radius: 2px;
-	background-color: var( --background-color-base, #fff );
-	box-shadow: 0 20px 48px 0 rgba( 0, 0, 0, 0.2 ); /* box-shadow-drop-xx-large */
-	color: var( --color-base, #202122 );
-	font-size: 0.875rem; /* font-size-small */
-	line-height: 1.375; /* line-height-xx-small */
-	opacity: 0;
+	border: @border-base;
+	border-radius: @border-radius-base;
+	background-color: @background-color-base;
+	box-shadow: 0 4px 8px 0 rgba( 0, 0, 0, 0.06 ), 0 0 16px 0 rgba( 0, 0, 0, 0.06 ); /* box-shadow-large */
+	color: @color-base;
+	opacity: @opacity-transparent;
 	transform: translateX( var( --ext-floatingui-floating-motion-x, 0 ) ) translateY( var( --ext-floatingui-floating-motion-y, 0 ) );
-	transition-duration: 250ms; /* transition-duration-base */
+	transition-duration: @transition-duration-base;
 	transition-property: opacity, transform;
-	transition-timing-function: ease; /* transition-timing-function-system */
+	transition-timing-function: @transition-timing-function-user;
 
 	.ext-floatingui-floating--visible > & {
-		opacity: 1;
-		transition-delay: 250ms; /* transition-duration-medium */
+		opacity: @opacity-base;
+		transition-delay: @transition-duration-medium;
 	}
 
 	.ext-floatingui-floating--visible[ data-mw-ext-floatingui-placement='top' ] > & {
@@ -48,16 +48,16 @@
 }
 
 .ext-floatingui-floating-content {
-	padding: 12px; /* spacing-75 */
+	padding: @spacing-75;
 	border-radius: inherit;
 	background-color: inherit;
 }
 
 .ext-floatingui-floating-arrow {
 	position: absolute;
-	z-index: -1;
-	width: 8px;
-	height: 8px;
+	z-index: @z-index-bottom;
+	width: @size-50;
+	height: @size-50;
 	border: inherit;
 	background-color: inherit;
 	box-shadow: inherit;
