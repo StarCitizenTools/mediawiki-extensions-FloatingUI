@@ -30,7 +30,7 @@ mw.loader.load( 'ext.floatingUI.lib' );
 2. Floating element has to have the HTML class `ext-floatingui-content` and place next to the reference element.
 
 ## Requirements
-* [MediaWiki](https://www.mediawiki.org) 1.39 or later
+* [MediaWiki](https://www.mediawiki.org) 1.43 or later
 
 ## Installation
 You can get the extension via Git (specifying FloatingUI as the destination directory):
