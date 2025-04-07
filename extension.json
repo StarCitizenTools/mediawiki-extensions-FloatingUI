@@ -46,11 +46,12 @@
 		},
 		"ext.floatingUI.lib": {
 			"scripts": [
-				"ext.floatingUI.lib/core.js",
-				"ext.floatingUI.lib/dom.js"
+				"lib/floatingui-core/floating-ui.core.umd.js",
+				"lib/floatingui-dom/floating-ui.dom.umd.js"
 			]
 		}
 	},
+	"ForeignResourcesDir": "modules/lib",
 	"ResourceFileModulePaths": {
 		"localBasePath": "modules",
 		"remoteExtPath": "FloatingUI/modules"

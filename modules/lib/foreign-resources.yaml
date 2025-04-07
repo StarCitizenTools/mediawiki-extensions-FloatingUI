@@ -1,0 +1,27 @@
+floatingui-core:
+  license: MIT
+  homepage: https://floating-ui.com
+  authors: Floating UI authors
+  version: 1.6.9
+  type: tar
+  src: https://registry.npmjs.org/@floating-ui/core/-/core-1.6.9.tgz
+  integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==
+
+  dest:
+    package/dist/floating-ui.core.umd.js:
+    package/LICENSE:
+    package/README.md:
+
+floatingui-dom:
+  license: MIT
+  homepage: https://floating-ui.com
+  authors: Floating UI authors
+  version: 1.6.10
+  type: tar
+  src: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.6.10.tgz
+  integrity: sha512-fskgCFv8J8OamCmyun8MfjB1Olfn+uZKjOKZ0vhYF3gRmEUXcGOjxWL8bBr7i4kIuPZ2KD2S3EUIOxnjC8kl2A==
+
+  dest:
+    package/dist/floating-ui.dom.umd.js:
+    package/LICENSE:
+    package/README.md:
