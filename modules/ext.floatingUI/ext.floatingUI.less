@@ -5,11 +5,15 @@
 }
 
 .ext-floatingui-floating {
-	position: absolute;
-	z-index: @z-index-tooltip;
-	top: 0;
-	left: 0;
 	max-width: calc( 100vw - @spacing-200 );
+
+	/* If teleportTarget is not set, then position the floating element ourselves */
+	body > & {
+		position: absolute;
+		z-index: @z-index-tooltip;
+		top: 0;
+		left: 0;
+	}
 }
 
 .ext-floatingui-floating-inner {
