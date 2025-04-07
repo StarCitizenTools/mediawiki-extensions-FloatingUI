@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.0.0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.3.1...v1.0.0) (2025-04-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* update MediaWiki requirement to 1.43.0
+* update imports to use MediaWiki namespace
+
+### Features
+
+* increase floating content padding ([f77590f](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/f77590f6ff61b3a27f6b67ed7e3e06f979d92be9))
+* use Codex tokens ([057d4a0](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/057d4a0f086890736bff55eec9b28a46b91e74f4))
+* use MW teleportTarget to position floating elements ([65754ac](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/65754ac97396f11505ef6edb201edc07861d1806))
+
+
+### Miscellaneous Chores
+
+* update @floating-ui/dom to 1.6.13 ([4599502](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/4599502da4f2c02c4891c4dea96c95b2cd72f828))
+
+
+### Code Refactoring
+
+* update imports to use MediaWiki namespace ([0b7c67a](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/0b7c67ae7e2719e228a32c54809479b1786f38b3))
+
+
+### Build System
+
+* update MediaWiki requirement to 1.43.0 ([f6990e4](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/f6990e4a55a1e1405984ce95c611058e490aea90))
+
 ## [0.3.1](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v0.3.0...v0.3.1) (2024-11-30)
 
 
