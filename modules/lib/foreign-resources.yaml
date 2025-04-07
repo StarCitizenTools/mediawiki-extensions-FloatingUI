@@ -16,10 +16,10 @@ floatingui-dom:
   license: MIT
   homepage: https://floating-ui.com
   authors: Floating UI authors
-  version: 1.6.10
+  version: 1.6.13
   type: tar
-  src: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.6.10.tgz
-  integrity: sha512-fskgCFv8J8OamCmyun8MfjB1Olfn+uZKjOKZ0vhYF3gRmEUXcGOjxWL8bBr7i4kIuPZ2KD2S3EUIOxnjC8kl2A==
+  src: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.6.13.tgz
+  integrity: sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==
 
   dest:
     package/dist/floating-ui.dom.umd.js:
