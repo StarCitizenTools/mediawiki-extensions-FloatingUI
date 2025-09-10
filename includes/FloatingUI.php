@@ -4,6 +4,7 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\FloatingUI;
 
+use MediaWiki\Html\Html;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\PPFrame;
 
@@ -64,10 +65,9 @@ class FloatingUI {
 		$isInline = true;
 		$wrapperTag = $isInline ? 'span' : 'div';
 
-		$output = <<<HTML
-			<$wrapperTag class='ext-floatingui-reference'>$referenceHtml</$wrapperTag>
-			<$wrapperTag class='ext-floatingui-content'>$floatingHtml</$wrapperTag>
-		HTML;
+		$referenceElement = Html::rawElement( $wrapperTag, [ 'class' => 'ext-floatingui-reference' ], $referenceHtml );
+		$contentElement = Html::rawElement( $wrapperTag, [ 'class' => 'ext-floatingui-content' ], $floatingHtml );
+		$output = $referenceElement . $contentElement;
 
 		return [ $output, 'noparse' => true, 'isHTML' => true ];
 	}
