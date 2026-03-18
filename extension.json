@@ -64,12 +64,5 @@
 			"class": "MediaWiki\\Extension\\FloatingUI\\Hooks"
 		}
 	},
-	"attributes": {
-		"CodeMirror": {
-			"TagModes": {
-				"floatingui": "text/mediawiki"
-			}
-		}
-	},
 	"manifest_version": 2
 }
