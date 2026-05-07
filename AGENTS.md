@@ -50,7 +50,7 @@ docker compose exec mediawiki bash -c "cd /var/www/html/w/extensions/FloatingUI 
 ### JavaScript
 
 - CommonJS modules: `require()` for imports, `module.exports` for exports
-- Bundled Floating UI library files live under `modules/lib/` and are managed via `ForeignResourcesDir` — do not hand-edit them
+- Bundled Floating UI library files live under `modules/lib/` and are managed via `ForeignResourcesDir` — do not hand-edit them (see [Updating the Floating UI library](#updating-the-floating-ui-library))
 
 ### LESS/CSS
 
@@ -73,3 +73,27 @@ docker compose exec mediawiki bash -c "cd /var/www/html/w/extensions/FloatingUI 
 
 - Any user-facing string needs a message key in `i18n/en.json`
 - Every key in `en.json` must also have a documentation entry in `i18n/qqq.json`
+
+## Updating the Floating UI library
+
+The bundled Floating UI library (`modules/lib/floatingui-core/` and `modules/lib/floatingui-dom/`) is managed through MediaWiki's `manageForeignResources` maintenance script. The pinned versions, source tarball URLs, and SHA-512 integrity hashes live in `modules/lib/foreign-resources.yaml`.
+
+To bump:
+
+1. Look up the new version's tarball URL and integrity hash on npm:
+   ```sh
+   curl -s https://registry.npmjs.org/@floating-ui/core/<NEW_VERSION> \
+     | python3 -c "import sys,json;d=json.load(sys.stdin);print(d['dist']['integrity']);print(d['dist']['tarball'])"
+   ```
+2. Edit `modules/lib/foreign-resources.yaml` — update `version`, `src`, and `integrity` for each package.
+3. Regenerate the bundled UMD files from within a MediaWiki installation:
+   ```sh
+   docker compose exec mediawiki bash -c "cd /var/www/html/w && php maintenance/run.php manageForeignResources --extension FloatingUI update"
+   ```
+4. Verify the committed files match the manifest:
+   ```sh
+   docker compose exec mediawiki bash -c "cd /var/www/html/w && php maintenance/run.php manageForeignResources --extension FloatingUI verify"
+   ```
+5. Commit `modules/lib/foreign-resources.yaml` together with the regenerated `*.umd.js`, `LICENSE`, and `README.md` files.
+
+Floating UI changelog: https://github.com/floating-ui/floating-ui/releases

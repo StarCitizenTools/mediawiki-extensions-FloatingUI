@@ -68,28 +68,36 @@
       overflowX,
       overflowY,
       display
-    } = getComputedStyle(element);
-    return /auto|scroll|overlay|hidden|clip/.test(overflow + overflowY + overflowX) && !['inline', 'contents'].includes(display);
+    } = getComputedStyle$1(element);
+    return /auto|scroll|overlay|hidden|clip/.test(overflow + overflowY + overflowX) && display !== 'inline' && display !== 'contents';
   }
   function isTableElement(element) {
-    return ['table', 'td', 'th'].includes(getNodeName(element));
+    return /^(table|td|th)$/.test(getNodeName(element));
   }
   function isTopLayer(element) {
-    return [':popover-open', ':modal'].some(selector => {
-      try {
-        return element.matches(selector);
-      } catch (e) {
-        return false;
+    try {
+      if (element.matches(':popover-open')) {
+        return true;
       }
-    });
+    } catch (_e) {
+      // no-op
+    }
+    try {
+      return element.matches(':modal');
+    } catch (_e) {
+      return false;
+    }
   }
+  const willChangeRe = /transform|translate|scale|rotate|perspective|filter/;
+  const containRe = /paint|layout|strict|content/;
+  const isNotNone = value => !!value && value !== 'none';
+  let isWebKitValue;
   function isContainingBlock(elementOrCss) {
-    const webkit = isWebKit();
-    const css = isElement(elementOrCss) ? getComputedStyle(elementOrCss) : elementOrCss;
+    const css = isElement(elementOrCss) ? getComputedStyle$1(elementOrCss) : elementOrCss;
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
     // https://drafts.csswg.org/css-transforms-2/#individual-transforms
-    return ['transform', 'translate', 'scale', 'rotate', 'perspective'].some(value => css[value] ? css[value] !== 'none' : false) || (css.containerType ? css.containerType !== 'normal' : false) || !webkit && (css.backdropFilter ? css.backdropFilter !== 'none' : false) || !webkit && (css.filter ? css.filter !== 'none' : false) || ['transform', 'translate', 'scale', 'rotate', 'perspective', 'filter'].some(value => (css.willChange || '').includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => (css.contain || '').includes(value));
+    return isNotNone(css.transform) || isNotNone(css.translate) || isNotNone(css.scale) || isNotNone(css.rotate) || isNotNone(css.perspective) || !isWebKit() && (isNotNone(css.backdropFilter) || isNotNone(css.filter)) || willChangeRe.test(css.willChange || '') || containRe.test(css.contain || '');
   }
   function getContainingBlock(element) {
     let currentNode = getParentNode(element);
@@ -104,13 +112,15 @@
     return null;
   }
   function isWebKit() {
-    if (typeof CSS === 'undefined' || !CSS.supports) return false;
-    return CSS.supports('-webkit-backdrop-filter', 'none');
+    if (isWebKitValue == null) {
+      isWebKitValue = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('-webkit-backdrop-filter', 'none');
+    }
+    return isWebKitValue;
   }
   function isLastTraversableNode(node) {
-    return ['html', 'body', '#document'].includes(getNodeName(node));
+    return /^(html|body|#document)$/.test(getNodeName(node));
   }
-  function getComputedStyle(element) {
+  function getComputedStyle$1(element) {
     return getWindow(element).getComputedStyle(element);
   }
   function getNodeScroll(element) {
@@ -164,15 +174,16 @@
     if (isBody) {
       const frameElement = getFrameElement(win);
       return list.concat(win, win.visualViewport || [], isOverflowElement(scrollableAncestor) ? scrollableAncestor : [], frameElement && traverseIframes ? getOverflowAncestors(frameElement) : []);
+    } else {
+      return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor, [], traverseIframes));
     }
-    return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor, [], traverseIframes));
   }
   function getFrameElement(win) {
     return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
   }
 
   function getCssDimensions(element) {
-    const css = getComputedStyle(element);
+    const css = getComputedStyle$1(element);
     // In testing environments, the `width` and `height` properties are empty
     // strings for SVG elements, returning NaN. Fallback to `0` in this case.
     let width = parseFloat(css.width) || 0;
@@ -277,7 +288,7 @@
       while (currentIFrame && offsetParent && offsetWin !== currentWin) {
         const iframeScale = getScale(currentIFrame);
         const iframeRect = currentIFrame.getBoundingClientRect();
-        const css = getComputedStyle(currentIFrame);
+        const css = getComputedStyle$1(currentIFrame);
         const left = iframeRect.left + (currentIFrame.clientLeft + parseFloat(css.paddingLeft)) * iframeScale.x;
         const top = iframeRect.top + (currentIFrame.clientTop + parseFloat(css.paddingTop)) * iframeScale.y;
         x *= iframeScale.x;
@@ -308,14 +319,9 @@
     return rect.left + leftScroll;
   }
 
-  function getHTMLOffset(documentElement, scroll, ignoreScrollbarX) {
-    if (ignoreScrollbarX === void 0) {
-      ignoreScrollbarX = false;
-    }
+  function getHTMLOffset(documentElement, scroll) {
     const htmlRect = documentElement.getBoundingClientRect();
-    const x = htmlRect.left + scroll.scrollLeft - (ignoreScrollbarX ? 0 :
-    // RTL <body> scrollbar.
-    getWindowScrollBarX(documentElement, htmlRect));
+    const x = htmlRect.left + scroll.scrollLeft - getWindowScrollBarX(documentElement, htmlRect);
     const y = htmlRect.top + scroll.scrollTop;
     return {
       x,
@@ -347,14 +353,14 @@
       if (getNodeName(offsetParent) !== 'body' || isOverflowElement(documentElement)) {
         scroll = getNodeScroll(offsetParent);
       }
-      if (isHTMLElement(offsetParent)) {
+      if (isOffsetParentAnElement) {
         const offsetRect = getBoundingClientRect(offsetParent);
         scale = getScale(offsetParent);
         offsets.x = offsetRect.x + offsetParent.clientLeft;
         offsets.y = offsetRect.y + offsetParent.clientTop;
       }
     }
-    const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll, true) : createCoords(0);
+    const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll) : createCoords(0);
     return {
       width: rect.width * scale.x,
       height: rect.height * scale.y,
@@ -377,7 +383,7 @@
     const height = max(html.scrollHeight, html.clientHeight, body.scrollHeight, body.clientHeight);
     let x = -scroll.scrollLeft + getWindowScrollBarX(element);
     const y = -scroll.scrollTop;
-    if (getComputedStyle(body).direction === 'rtl') {
+    if (getComputedStyle$1(body).direction === 'rtl') {
       x += max(html.clientWidth, body.clientWidth) - width;
     }
     return {
@@ -388,6 +394,10 @@
     };
   }
 
+  // Safety check: ensure the scrollbar space is reasonable in case this
+  // calculation is affected by unusual styles.
+  // Most scrollbars leave 15-18px of space.
+  const SCROLLBAR_MAX = 25;
   function getViewportRect(element, strategy) {
     const win = getWindow(element);
     const html = getDocumentElement(element);
@@ -404,6 +414,24 @@
         x = visualViewport.offsetLeft;
         y = visualViewport.offsetTop;
       }
+    }
+    const windowScrollbarX = getWindowScrollBarX(html);
+    // <html> `overflow: hidden` + `scrollbar-gutter: stable` reduces the
+    // visual width of the <html> but this is not considered in the size
+    // of `html.clientWidth`.
+    if (windowScrollbarX <= 0) {
+      const doc = html.ownerDocument;
+      const body = doc.body;
+      const bodyStyles = getComputedStyle(body);
+      const bodyMarginInline = doc.compatMode === 'CSS1Compat' ? parseFloat(bodyStyles.marginLeft) + parseFloat(bodyStyles.marginRight) || 0 : 0;
+      const clippingStableScrollbarWidth = Math.abs(html.clientWidth - body.clientWidth - bodyMarginInline);
+      if (clippingStableScrollbarWidth <= SCROLLBAR_MAX) {
+        width -= clippingStableScrollbarWidth;
+      }
+    } else if (windowScrollbarX <= SCROLLBAR_MAX) {
+      // If the <body> scrollbar is on the left, the width needs to be extended
+      // by the scrollbar amount so there isn't extra space on the right.
+      width += windowScrollbarX;
     }
     return {
       width,
@@ -454,7 +482,7 @@
     if (parentNode === stopNode || !isElement(parentNode) || isLastTraversableNode(parentNode)) {
       return false;
     }
-    return getComputedStyle(parentNode).position === 'fixed' || hasFixedPositionAncestor(parentNode, stopNode);
+    return getComputedStyle$1(parentNode).position === 'fixed' || hasFixedPositionAncestor(parentNode, stopNode);
   }
 
   // A "clipping ancestor" is an `overflow` element with the characteristic of
@@ -467,17 +495,17 @@
     }
     let result = getOverflowAncestors(element, [], false).filter(el => isElement(el) && getNodeName(el) !== 'body');
     let currentContainingBlockComputedStyle = null;
-    const elementIsFixed = getComputedStyle(element).position === 'fixed';
+    const elementIsFixed = getComputedStyle$1(element).position === 'fixed';
     let currentNode = elementIsFixed ? getParentNode(element) : element;
 
     // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
     while (isElement(currentNode) && !isLastTraversableNode(currentNode)) {
-      const computedStyle = getComputedStyle(currentNode);
+      const computedStyle = getComputedStyle$1(currentNode);
       const currentNodeIsContaining = isContainingBlock(currentNode);
       if (!currentNodeIsContaining && computedStyle.position === 'fixed') {
         currentContainingBlockComputedStyle = null;
       }
-      const shouldDropCurrentNode = elementIsFixed ? !currentNodeIsContaining && !currentContainingBlockComputedStyle : !currentNodeIsContaining && computedStyle.position === 'static' && !!currentContainingBlockComputedStyle && ['absolute', 'fixed'].includes(currentContainingBlockComputedStyle.position) || isOverflowElement(currentNode) && !currentNodeIsContaining && hasFixedPositionAncestor(element, currentNode);
+      const shouldDropCurrentNode = elementIsFixed ? !currentNodeIsContaining && !currentContainingBlockComputedStyle : !currentNodeIsContaining && computedStyle.position === 'static' && !!currentContainingBlockComputedStyle && (currentContainingBlockComputedStyle.position === 'absolute' || currentContainingBlockComputedStyle.position === 'fixed') || isOverflowElement(currentNode) && !currentNodeIsContaining && hasFixedPositionAncestor(element, currentNode);
       if (shouldDropCurrentNode) {
         // Drop non-containing blocks.
         result = result.filter(ancestor => ancestor !== currentNode);
@@ -502,20 +530,23 @@
     } = _ref;
     const elementClippingAncestors = boundary === 'clippingAncestors' ? isTopLayer(element) ? [] : getClippingElementAncestors(element, this._c) : [].concat(boundary);
     const clippingAncestors = [...elementClippingAncestors, rootBoundary];
-    const firstClippingAncestor = clippingAncestors[0];
-    const clippingRect = clippingAncestors.reduce((accRect, clippingAncestor) => {
-      const rect = getClientRectFromClippingAncestor(element, clippingAncestor, strategy);
-      accRect.top = max(rect.top, accRect.top);
-      accRect.right = min(rect.right, accRect.right);
-      accRect.bottom = min(rect.bottom, accRect.bottom);
-      accRect.left = max(rect.left, accRect.left);
-      return accRect;
-    }, getClientRectFromClippingAncestor(element, firstClippingAncestor, strategy));
+    const firstRect = getClientRectFromClippingAncestor(element, clippingAncestors[0], strategy);
+    let top = firstRect.top;
+    let right = firstRect.right;
+    let bottom = firstRect.bottom;
+    let left = firstRect.left;
+    for (let i = 1; i < clippingAncestors.length; i++) {
+      const rect = getClientRectFromClippingAncestor(element, clippingAncestors[i], strategy);
+      top = max(rect.top, top);
+      right = min(rect.right, right);
+      bottom = min(rect.bottom, bottom);
+      left = max(rect.left, left);
+    }
     return {
-      width: clippingRect.right - clippingRect.left,
-      height: clippingRect.bottom - clippingRect.top,
-      x: clippingRect.left,
-      y: clippingRect.top
+      width: right - left,
+      height: bottom - top,
+      x: left,
+      y: top
     };
   }
 
@@ -540,6 +571,12 @@
       scrollTop: 0
     };
     const offsets = createCoords(0);
+
+    // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
+    // Firefox with layout.scrollbar.side = 3 in about:config to test this.
+    function setLeftRTLScrollbarOffset() {
+      offsets.x = getWindowScrollBarX(documentElement);
+    }
     if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
       if (getNodeName(offsetParent) !== 'body' || isOverflowElement(documentElement)) {
         scroll = getNodeScroll(offsetParent);
@@ -549,10 +586,11 @@
         offsets.x = offsetRect.x + offsetParent.clientLeft;
         offsets.y = offsetRect.y + offsetParent.clientTop;
       } else if (documentElement) {
-        // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
-        // Firefox with layout.scrollbar.side = 3 in about:config to test this.
-        offsets.x = getWindowScrollBarX(documentElement);
+        setLeftRTLScrollbarOffset();
       }
+    }
+    if (isFixed && !isOffsetParentAnElement && documentElement) {
+      setLeftRTLScrollbarOffset();
     }
     const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll) : createCoords(0);
     const x = rect.left + scroll.scrollLeft - offsets.x - htmlOffset.x;
@@ -566,11 +604,11 @@
   }
 
   function isStaticPositioned(element) {
-    return getComputedStyle(element).position === 'static';
+    return getComputedStyle$1(element).position === 'static';
   }
 
   function getTrueOffsetParent(element, polyfill) {
-    if (!isHTMLElement(element) || getComputedStyle(element).position === 'fixed') {
+    if (!isHTMLElement(element) || getComputedStyle$1(element).position === 'fixed') {
       return null;
     }
     if (polyfill) {
@@ -631,7 +669,7 @@
   };
 
   function isRTL(element) {
-    return getComputedStyle(element).direction === 'rtl';
+    return getComputedStyle$1(element).direction === 'rtl';
   }
 
   const platform = {
@@ -730,7 +768,7 @@
           // Handle <iframe>s
           root: root.ownerDocument
         });
-      } catch (e) {
+      } catch (_e) {
         io = new IntersectionObserver(handleObserve, options);
       }
       io.observe(element);
@@ -759,7 +797,7 @@
       animationFrame = false
     } = options;
     const referenceEl = unwrapElement(reference);
-    const ancestors = ancestorScroll || ancestorResize ? [...(referenceEl ? getOverflowAncestors(referenceEl) : []), ...getOverflowAncestors(floating)] : [];
+    const ancestors = ancestorScroll || ancestorResize ? [...(referenceEl ? getOverflowAncestors(referenceEl) : []), ...(floating ? getOverflowAncestors(floating) : [])] : [];
     ancestors.forEach(ancestor => {
       ancestorScroll && ancestor.addEventListener('scroll', update, {
         passive: true
@@ -772,7 +810,7 @@
     if (elementResize) {
       resizeObserver = new ResizeObserver(_ref => {
         let [firstEntry] = _ref;
-        if (firstEntry && firstEntry.target === referenceEl && resizeObserver) {
+        if (firstEntry && firstEntry.target === referenceEl && resizeObserver && floating) {
           // Prevent update loops when using the `size` middleware.
           // https://github.com/floating-ui/floating-ui/issues/1740
           resizeObserver.unobserve(floating);
@@ -787,7 +825,9 @@
       if (referenceEl && !animationFrame) {
         resizeObserver.observe(referenceEl);
       }
-      resizeObserver.observe(floating);
+      if (floating) {
+        resizeObserver.observe(floating);
+      }
     }
     let frameId;
     let prevRefRect = animationFrame ? getBoundingClientRect(reference) : null;

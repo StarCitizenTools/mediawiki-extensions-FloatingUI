@@ -2,10 +2,10 @@ floatingui-core:
   license: MIT
   homepage: https://floating-ui.com
   authors: Floating UI authors
-  version: 1.6.9
+  version: 1.7.5
   type: tar
-  src: https://registry.npmjs.org/@floating-ui/core/-/core-1.6.9.tgz
-  integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==
+  src: https://registry.npmjs.org/@floating-ui/core/-/core-1.7.5.tgz
+  integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==
 
   dest:
     package/dist/floating-ui.core.umd.js:
@@ -16,10 +16,10 @@ floatingui-dom:
   license: MIT
   homepage: https://floating-ui.com
   authors: Floating UI authors
-  version: 1.6.13
+  version: 1.7.6
   type: tar
-  src: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.6.13.tgz
-  integrity: sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==
+  src: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.7.6.tgz
+  integrity: sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==
 
   dest:
     package/dist/floating-ui.dom.umd.js:
