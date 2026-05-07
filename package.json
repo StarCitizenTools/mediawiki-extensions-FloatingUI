@@ -1,18 +1,20 @@
 {
 	"private": true,
 	"scripts": {
-		"lint": "npm -s run lint:js && npm -s run lint:i18n",
+		"lint": "npm -s run lint:js && npm -s run lint:styles && npm -s run lint:i18n",
 		"lint:fix:js": "npm -s run lint:js -- --fix",
 		"lint:fix:styles": "npm -s run lint:styles -- --fix",
+		"lint:i18n": "banana-checker --requireLowerCase=0 i18n/",
 		"lint:js": "eslint --cache --max-warnings 0 .",
 		"lint:styles": "stylelint \"**/*.{less,css}\"",
-		"lint:i18n": "banana-checker --requireLowerCase=0 i18n/"
+		"preflight": "npm run lint"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.32.3",
-		"eslint-plugin-no-jquery": "3.1.1",
+		"eslint-config-wikimedia": "0.32.4",
+		"eslint-plugin-no-jquery": "4.0.0",
 		"grunt-banana-checker": "0.13.0",
-		"stylelint-config-idiomatic-order": "10.0.0",
-		"stylelint-config-wikimedia": "0.18.0"
+		"stylelint-config-recess-order": "7.7.0",
+		"stylelint-config-wikimedia": "0.19.2",
+		"stylelint-order": "8.1.1"
 	}
 }
