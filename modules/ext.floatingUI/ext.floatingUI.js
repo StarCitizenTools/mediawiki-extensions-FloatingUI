@@ -78,7 +78,6 @@ class FloatingUI {
 			this.update
 		);
 		this.referenceEl.setAttribute( 'aria-details', FLOATING_EL_ID );
-		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.add( FLOATING_EL_VISIBLE_CLASS );
 		[
 			[ 'mouseleave', this.hide ],
@@ -93,7 +92,6 @@ class FloatingUI {
 			return;
 		}
 		this.referenceEl.removeAttribute( 'aria-details' );
-		// eslint-disable-next-line mediawiki/class-doc
 		this.floatingEl.classList.remove( FLOATING_EL_VISIBLE_CLASS );
 		// Delay the removal of the element by 250ms + 250ms (transition delay + transition duration)
 		setTimeout( () => {
@@ -167,6 +165,7 @@ function findContentEl( referenceEl ) {
 function init() {
 	const referenceEls = document.querySelectorAll( '.ext-floatingui-reference' );
 	const sharedEls = createSharedEls();
+	/* eslint-disable-next-line n/no-missing-require */
 	const teleportTarget = require( 'mediawiki.page.ready' ).teleportTarget ?? document.body;
 
 	referenceEls.forEach( ( referenceEl ) => {

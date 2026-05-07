@@ -10,24 +10,24 @@
 	/* If teleportTarget is not set, then position the floating element ourselves */
 	body > & {
 		position: absolute;
-		z-index: @z-index-tooltip;
 		top: 0;
 		left: 0;
+		z-index: @z-index-tooltip;
 	}
 }
 
 .ext-floatingui-floating-inner {
 	--ext-floatingui-floating-motion-distance: 4px;
+	color: @color-base;
+	background-color: @background-color-base;
 	border: @border-base;
 	border-radius: @border-radius-base;
-	background-color: @background-color-base;
 	box-shadow: 0 4px 8px 0 rgba( 0, 0, 0, 0.06 ), 0 0 16px 0 rgba( 0, 0, 0, 0.06 ); /* box-shadow-large */
-	color: @color-base;
 	opacity: @opacity-transparent;
 	transform: translateX( var( --ext-floatingui-floating-motion-x, 0 ) ) translateY( var( --ext-floatingui-floating-motion-y, 0 ) );
+	transition-timing-function: @transition-timing-function-user;
 	transition-duration: @transition-duration-base;
 	transition-property: opacity, transform;
-	transition-timing-function: @transition-timing-function-user;
 
 	.ext-floatingui-floating--visible > & {
 		opacity: @opacity-base;
@@ -53,8 +53,8 @@
 
 .ext-floatingui-floating-content {
 	padding: @spacing-75;
-	border-radius: inherit;
 	background-color: inherit;
+	border-radius: inherit;
 }
 
 .ext-floatingui-floating-arrow {
@@ -62,8 +62,8 @@
 	z-index: @z-index-bottom;
 	width: @size-50;
 	height: @size-50;
-	border: inherit;
 	background-color: inherit;
+	border: inherit;
 	box-shadow: inherit;
 	transform: rotate( 45deg );
 }
