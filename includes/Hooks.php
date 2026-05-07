@@ -7,7 +7,7 @@ namespace MediaWiki\Extension\FloatingUI;
 use MediaWiki\Hook\ParserFirstCallInitHook;
 use MediaWiki\Parser\Parser;
 
-class Hooks implements ParserFirstCallInitHook {
+final class Hooks implements ParserFirstCallInitHook {
 	/**
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
 	 *
