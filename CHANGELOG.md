@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.0.2](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.1...v1.0.2) (2026-05-07)
+
+
+### Bug Fixes
+
+* remove CodeMirror attribute ([b0252ed](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/b0252ed750aa88a12098a89ed67ea030a0f13d49))
+
+
+### Miscellaneous Chores
+
+* add AGENTS.md and composer preflight script ([f8f4291](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/f8f42910b61ac412c655f11465c1dadc6bda3cb2))
+* bump Floating UI to core 1.7.5 / dom 1.7.6 ([76fd5fd](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/76fd5fd6a26389bceb48017d02e61f2330b38138))
+* delete bin directory ([20f46c9](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/20f46c94b744a2b6d1c28a693f849fcb4e3bab01))
+* update and clean up dev deps ([76b270a](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/76b270a5e9cf25249f32b0a92b0706023c2091c1))
+
 ## [1.0.1](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.0...v1.0.1) (2025-04-07)
 
 
