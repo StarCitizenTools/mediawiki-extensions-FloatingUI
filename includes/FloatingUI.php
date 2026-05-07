@@ -62,11 +62,8 @@ class FloatingUI {
 		$referenceHtml = self::parseWikitext( $referenceArg, $parser, $frame );
 		$floatingHtml = self::parseWikitext( $floatingArg, $parser, $frame );
 
-		$isInline = true;
-		$wrapperTag = $isInline ? 'span' : 'div';
-
-		$referenceElement = Html::rawElement( $wrapperTag, [ 'class' => 'ext-floatingui-reference' ], $referenceHtml );
-		$contentElement = Html::rawElement( $wrapperTag, [ 'class' => 'ext-floatingui-content' ], $floatingHtml );
+		$referenceElement = Html::rawElement( 'span', [ 'class' => 'ext-floatingui-reference' ], $referenceHtml );
+		$contentElement = Html::rawElement( 'span', [ 'class' => 'ext-floatingui-content' ], $floatingHtml );
 		$output = $referenceElement . $contentElement;
 
 		return [ $output, 'noparse' => true, 'isHTML' => true ];
