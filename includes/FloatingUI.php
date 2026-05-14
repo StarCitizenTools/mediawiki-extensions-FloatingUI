@@ -27,7 +27,7 @@ final class FloatingUI {
 		$floatingArg = self::getArg( 1, $args, $frame );
 
 		if ( $referenceArg === '' || $floatingArg === '' ) {
-			return [];
+			return [ '' ];
 		}
 
 		// Parse wikitext into HTML up front because the parser-function output is returned as raw HTML.
