@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.2...v1.0.3) (2026-05-14)
+
+
+### Bug Fixes
+
+* return text key from empty-args branch ([d1a2c1f](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/d1a2c1fcffe06bf741c494810c6c9519ae2dd4fc))
+
 ## [1.0.2](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.1...v1.0.2) (2026-05-07)
 
 
