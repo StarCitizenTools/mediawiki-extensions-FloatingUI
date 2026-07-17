@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.3...v1.0.4) (2026-07-17)
+
+
+### Bug Fixes
+
+* trim whitespace from parser function arguments ([e75329c](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/e75329c0013ab1d7376785d0dce306f0bc53fc0a))
+
 ## [1.0.3](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.2...v1.0.3) (2026-05-14)
 
 
