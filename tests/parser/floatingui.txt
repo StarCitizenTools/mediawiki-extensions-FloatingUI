@@ -1,0 +1,34 @@
+!! version 2
+
+# FloatingUI parser tests
+#
+# The {{#floatingui:reference|floating}} parser function renders two adjacent
+# spans (.ext-floatingui-reference + .ext-floatingui-content). Arguments must be
+# trimmed: a leading space would otherwise make recursiveTagParseFully() emit a
+# <pre> block, which the tidy pass hoists out of the wrapping paragraph and
+# breaks the reference/content adjacency the client-side JS relies on.
+
+!! test
+FloatingUI: reference and floating content without surrounding whitespace
+!! wikitext
+{{#floatingui:lol|wow}}
+!! html
+<p><span class="ext-floatingui-reference">lol</span><span class="ext-floatingui-content">wow</span>
+</p>
+!! end
+
+!! test
+FloatingUI: surrounding whitespace around arguments is trimmed
+!! wikitext
+{{#floatingui: lol | wow }}
+!! html
+<p><span class="ext-floatingui-reference">lol</span><span class="ext-floatingui-content">wow</span>
+</p>
+!! end
+
+!! test
+FloatingUI: whitespace-only floating argument yields no output
+!! wikitext
+{{#floatingui: lol | }}
+!! html
+!! end

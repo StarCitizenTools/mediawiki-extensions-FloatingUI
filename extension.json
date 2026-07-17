@@ -64,5 +64,8 @@
 			"class": "MediaWiki\\Extension\\FloatingUI\\Hooks"
 		}
 	},
+	"ParserTestFiles": [
+		"tests/parser/floatingui.txt"
+	],
 	"manifest_version": 2
 }
