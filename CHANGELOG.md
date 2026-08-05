@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.5](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.4...v1.0.5) (2026-08-05)
+
+
+### Bug Fixes
+
+* dead space from empty #mw-teleport-target container ([#57](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/issues/57)) ([eaa2c2f](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/eaa2c2fceafb52d7ccdf95b84cb16cdcc63dee6d))
+* **deps:** update Floating UI foreign resources ([9b75ea5](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/9b75ea5a4bb8586d65ff780e0b3fbae686c8c5d6))
+
 ## [1.0.4](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.3...v1.0.4) (2026-07-17)
 
 
