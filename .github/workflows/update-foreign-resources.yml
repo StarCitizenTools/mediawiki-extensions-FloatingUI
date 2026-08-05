@@ -1,0 +1,21 @@
+name: Update foreign resources
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  update:
+    uses: StarCitizenTools/mediawiki-ci-workflows/.github/workflows/update-foreign-resources.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      project-type: extension
+      project-name: FloatingUI
+      pr-title: "fix(deps): update Floating UI foreign resources"
+    # Empty until the org defines PR_TOKEN (which would let update PRs
+    # trigger CI); the workflow then falls back to GITHUB_TOKEN.
+    secrets:
+      PR_TOKEN: ${{ secrets.PR_TOKEN }}
