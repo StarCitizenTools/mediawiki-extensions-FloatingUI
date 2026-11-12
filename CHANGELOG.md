@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.5...v1.0.6) (2026-11-12)
+
+
+### Miscellaneous Chores
+
+* let agents start their own dev environment with mwenv ([d7f814b](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/commit/d7f814b08c2ab21c69af257e2ae1204f43769d7e))
+
 ## [1.0.5](https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI/compare/v1.0.4...v1.0.5) (2026-08-05)
 
 
